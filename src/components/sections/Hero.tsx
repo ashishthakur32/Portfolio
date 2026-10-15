@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { TypeAnimation } from 'react-type-animation';
 import { ArrowRight, Download, Mail } from 'lucide-react';
 import { personalInfo, typingRoles, heroStats } from '@/lib/data/resume';
@@ -9,22 +10,35 @@ import ParticleBackground from './ParticleBackground';
 import ScrambleText from '@/components/animations/ScrambleText';
 import MagneticButton from '@/components/animations/MagneticButton';
 import GlowCard from '@/components/animations/GlowCard';
+import AnimatedNumber from '@/components/animations/AnimatedNumber';
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const visualY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   const handleScrollTo = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-16 animated-gradient overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center pt-24 pb-16 animated-gradient overflow-hidden"
+    >
       <ParticleBackground />
 
       {/* Content */}
       <div className="container-portfolio relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left column - text */}
-          <div>
+          <motion.div style={{ y: textY, opacity: contentOpacity }}>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -84,7 +98,7 @@ export default function Hero() {
               <MagneticButton>
                 <button
                   onClick={() => handleScrollTo('#projects')}
-                  className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium transition-all hover:opacity-90 hover:shadow-lg hover:shadow-cyan-500/20"
+                  className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-amber-600 text-white font-medium transition-all hover:opacity-90 hover:shadow-lg hover:shadow-orange-500/20"
                 >
                   View Projects
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -93,7 +107,7 @@ export default function Hero() {
               <MagneticButton>
                 <button
                   onClick={() => handleScrollTo('#contact')}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-card-border bg-card-bg text-foreground font-medium hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-card-border bg-card-bg text-foreground font-medium hover:border-orange-500/50 hover:text-orange-400 transition-all"
                 >
                   Contact Me
                 </button>
@@ -123,7 +137,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="p-3 rounded-lg border border-card-border bg-card-bg text-foreground hover:border-cyan-500/50 hover:text-cyan-400 transition-all duration-200 hover:-translate-y-1"
+                className="p-3 rounded-lg border border-card-border bg-card-bg text-foreground hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200 hover:-translate-y-1"
               >
                 <LinkedInIcon className="w-5 h-5" />
               </a>
@@ -132,27 +146,32 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="p-3 rounded-lg border border-card-border bg-card-bg text-foreground hover:border-cyan-500/50 hover:text-cyan-400 transition-all duration-200 hover:-translate-y-1"
+                className="p-3 rounded-lg border border-card-border bg-card-bg text-foreground hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200 hover:-translate-y-1"
               >
                 <GitHubIcon className="w-5 h-5" />
               </a>
               <a
                 href={`mailto:${personalInfo.email}`}
                 aria-label="Email"
-                className="p-3 rounded-lg border border-card-border bg-card-bg text-foreground hover:border-cyan-500/50 hover:text-cyan-400 transition-all duration-200 hover:-translate-y-1"
+                className="p-3 rounded-lg border border-card-border bg-card-bg text-foreground hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200 hover:-translate-y-1"
               >
                 <Mail className="w-5 h-5" />
               </a>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Right column - stats / visual */}
           <motion.div
+            style={{ y: visualY }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="hidden lg:block"
+            className="hidden lg:block relative"
           >
+            {/* Sweeping glow ring */}
+            <div className="pointer-events-none absolute -inset-10 -z-10 opacity-40">
+              <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0%,rgba(255,90,31,0.28)_25%,transparent_50%,rgba(255,158,74,0.2)_75%,transparent_100%)] animate-spin-slow blur-2xl" />
+            </div>
             <div className="grid grid-cols-2 gap-4">
               {heroStats.map((stat, i) => (
                 <motion.div
@@ -163,8 +182,10 @@ export default function Hero() {
                   className={i % 2 === 1 ? 'translate-y-6' : ''}
                 >
                   <GlowCard>
-                    <div className="p-6 text-center">
-                      <p className="text-3xl md:text-4xl font-bold text-gradient">{stat.value}</p>
+                    <div className="p-6 text-center animate-float" style={{ animationDelay: `${i * 0.5}s` }}>
+                      <p className="text-3xl md:text-4xl font-bold text-gradient">
+                        <AnimatedNumber value={stat.value} />
+                      </p>
                       <p className="mt-2 text-sm text-soft-gray">{stat.label}</p>
                     </div>
                   </GlowCard>
@@ -180,12 +201,12 @@ export default function Hero() {
             >
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm font-medium">Current Focus</span>
-                <span className="px-2 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-medium">
+                <span className="px-2 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-medium">
                   Active
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center">
                   <span className="text-white font-bold text-sm">SD</span>
                 </div>
                 <div>

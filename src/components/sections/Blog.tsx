@@ -22,7 +22,7 @@ export default function Blog() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogPosts.map((post, i) => (
           <ScrollReveal key={post.slug} delay={i * 0.08}>
-            <article className="glass-card p-6 h-full flex flex-col group hover:border-cyan-500/30 hover:-translate-y-1 transition-all duration-300">
+            <article className="glass-card p-6 h-full flex flex-col group hover:border-orange-500/30 hover:-translate-y-1 transition-all duration-300">
               <div
                 className={cn(
                   'w-full h-1 rounded-full bg-gradient-to-r opacity-80 mb-5',
@@ -40,7 +40,7 @@ export default function Blog() {
                 </span>
               </div>
 
-              <h3 className="font-bold text-lg group-hover:text-cyan-400 transition-colors mb-2">
+              <h3 className="font-bold text-lg group-hover:text-orange-400 transition-colors mb-2">
                 {post.title}
               </h3>
 
@@ -52,7 +52,7 @@ export default function Blog() {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 rounded-full text-xs bg-white/5 text-soft-gray border border-white/10"
+                    className="px-2 py-0.5 rounded-full text-xs bg-card-bg text-soft-gray border border-card-border"
                   >
                     {tag}
                   </span>

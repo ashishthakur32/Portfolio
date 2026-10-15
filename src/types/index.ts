@@ -8,6 +8,7 @@ export interface PersonalInfo {
   linkedin: string;
   github: string;
   resumeUrl: string;
+  photo?: string;
 }
 
 export interface SkillCategory {

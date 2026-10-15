@@ -14,12 +14,13 @@ export const personalInfo: PersonalInfo = {
   title: 'Software Developer',
   summary:
     'Software Developer skilled in MERN stack development, RESTful APIs, and scalable web applications. Proficient in Java, JavaScript, React.js, Node.js, Express.js, MongoDB, PostgreSQL, and Data Structures & Algorithms.',
-  email: 'ashishthakur1014@gmail.com',
+  email: 'ashishthaku001@gmail.com',
   phone: '+91-8114901264',
   location: 'Bengaluru, Karnataka, India',
-  linkedin: 'https://linkedin.com/in/ashishthakur',
-  github: 'https://github.com/ashishthakur',
+  linkedin: 'https://www.linkedin.com/in/ashish-kumar-thakur-487364211/',
+  github: 'https://github.com/ashishthakur32',
   resumeUrl: '/resume.pdf',
+  photo: '/profile.jpg',
 };
 
 export const navLinks: NavLink[] = [

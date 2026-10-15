@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import CustomCursor from '@/components/animations/CustomCursor';
 import ScrollProgress from '@/components/animations/ScrollProgress';
 import WelcomeIntro from '@/components/animations/WelcomeIntro';
-import CursorDuck from '@/components/animations/CursorDuck';
+import WaterRipple from '@/components/animations/WaterRipple';
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -19,11 +19,15 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+    setShowIntro(true);
+  }, []);
+
   return (
     <>
       {showIntro && <WelcomeIntro onComplete={() => setShowIntro(false)} />}
       {!isMobile && <CustomCursor />}
-      {!isMobile && <CursorDuck />}
+      <WaterRipple />
       <ScrollProgress />
       {children}
     </>

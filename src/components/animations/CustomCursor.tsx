@@ -13,19 +13,13 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [cursorVariant, setCursorVariant] = useState<'default' | 'text' | 'link'>('default');
-
-  const trailRef = useRef<HTMLDivElement>(null);
-  const [trails, setTrails] = useState<{ x: number; y: number; id: number }[]>([]);
-  const trailId = useRef(0);
+  const initialized = useRef(false);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-
-      trailId.current += 1;
-      const newTrail = { x: e.clientX, y: e.clientY, id: trailId.current };
-      setTrails((prev) => [...prev.slice(-5), newTrail]);
+      initialized.current = true;
     };
 
     const handleMouseDown = () => setIsClicking(true);
@@ -47,13 +41,14 @@ export default function CustomCursor() {
         target.closest('h3')
       ) {
         setCursorVariant('text');
+        setIsHovering(false);
       } else {
         setIsHovering(false);
         setCursorVariant('default');
       }
     };
 
-    window.addEventListener('mousemove', moveCursor);
+    window.addEventListener('mousemove', moveCursor, { passive: true });
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     window.addEventListener('mouseover', handleMouseOver);
@@ -66,32 +61,8 @@ export default function CustomCursor() {
     };
   }, [cursorX, cursorY]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTrails((prev) => prev.slice(1));
-    }, 80);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
-      {/* Cursor trails */}
-      {trails.map((trail, i) => (
-        <motion.div
-          key={trail.id}
-          className="fixed pointer-events-none z-[9999] rounded-full bg-cyan-400"
-          initial={{ opacity: 0.6, scale: 1 }}
-          animate={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            left: trail.x - 3,
-            top: trail.y - 3,
-            width: 6,
-            height: 6,
-          }}
-        />
-      ))}
-
       {/* Main cursor dot */}
       <motion.div
         className="fixed pointer-events-none z-[9999] rounded-full mix-blend-difference"
@@ -107,13 +78,14 @@ export default function CustomCursor() {
           height: cursorVariant === 'text' ? 80 : cursorVariant === 'link' ? 48 : 12,
           backgroundColor: cursorVariant === 'link' ? 'rgba(34, 211, 238, 0.15)' : '#fff',
           scale: isClicking ? 0.8 : 1,
+          opacity: initialized.current ? 1 : 0,
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 300 }}
       />
 
       {/* Outer ring */}
       <motion.div
-        className="fixed pointer-events-none z-[9998] rounded-full border border-cyan-400/50"
+        className="fixed pointer-events-none z-[9998] rounded-full border border-orange-400/50"
         style={{
           left: cursorXSpring,
           top: cursorYSpring,
@@ -124,7 +96,7 @@ export default function CustomCursor() {
         animate={{
           width: isHovering ? 64 : 36,
           height: isHovering ? 64 : 36,
-          opacity: 0.6,
+          opacity: initialized.current ? 0.6 : 0,
           borderWidth: isHovering ? 2 : 1,
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}

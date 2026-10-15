@@ -55,7 +55,7 @@ export default function Testimonials() {
       <ScrollReveal>
         <div className="relative max-w-3xl mx-auto">
           <div className="glass-card p-8 md:p-10 relative overflow-hidden">
-            <Quote className="absolute top-6 right-6 w-12 h-12 text-white/5" />
+            <Quote className="absolute top-6 right-6 w-12 h-12 text-foreground/5" />
 
             <div className="min-h-[220px] flex items-center">
               <AnimatePresence mode="wait" custom={direction}>
@@ -82,7 +82,7 @@ export default function Testimonials() {
                     <div>
                       <p className="font-semibold">{current.name}</p>
                       <p className="text-sm text-soft-gray">
-                        {current.role} · {current.company}
+                        {current.role} Ã‚Â· {current.company}
                       </p>
                     </div>
                   </footer>
@@ -96,7 +96,7 @@ export default function Testimonials() {
             <button
               onClick={prev}
               aria-label="Previous testimonial"
-              className="p-2 rounded-lg border border-white/10 text-soft-gray hover:border-cyan-500/50 hover:text-cyan-400 transition-colors"
+              className="p-2 rounded-lg border border-card-border text-soft-gray hover:border-orange-500/50 hover:text-orange-400 transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -114,8 +114,8 @@ export default function Testimonials() {
                   className={cn(
                     'w-2 h-2 rounded-full transition-all duration-300',
                     i === index
-                      ? 'bg-gradient-to-r from-cyan-400 to-blue-500 w-6'
-                      : 'bg-white/20 hover:bg-white/40'
+                      ? 'bg-gradient-to-r from-orange-400 to-amber-500 w-6'
+                      : 'bg-foreground/20 hover:bg-foreground/40'
                   )}
                 />
               ))}
@@ -124,7 +124,7 @@ export default function Testimonials() {
             <button
               onClick={next}
               aria-label="Next testimonial"
-              className="p-2 rounded-lg border border-white/10 text-soft-gray hover:border-cyan-500/50 hover:text-cyan-400 transition-colors"
+              className="p-2 rounded-lg border border-card-border text-soft-gray hover:border-orange-500/50 hover:text-orange-400 transition-colors"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

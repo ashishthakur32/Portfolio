@@ -15,7 +15,7 @@ import {
 import { skillCategories } from '@/lib/data/resume';
 import Section from '@/components/ui/Section';
 import ScrollReveal from '@/components/animations/ScrollReveal';
-import StaggerContainer, { itemVariants } from '@/components/animations/StaggerContainer';
+import StaggerContainer, { sideVariants } from '@/components/animations/StaggerContainer';
 import { motion } from 'motion/react';
 
 const iconMap: Record<string, LucideIcon> = {
@@ -44,18 +44,18 @@ export default function Skills() {
     >
       <StaggerContainer
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        stagger={0.08}
+        stagger={0.12}
       >
-        {skillCategories.map((category) => {
+        {skillCategories.map((category, i) => {
           const Icon = iconMap[category.icon] ?? Code2;
           return (
-            <motion.div key={category.category} variants={itemVariants}>
-              <div className="glass-card p-6 h-full group hover:border-cyan-500/30 hover:-translate-y-1 transition-all duration-300 hover:glow-primary">
+            <motion.div key={category.category} variants={sideVariants(i)}>
+              <div className="glass-card p-6 h-full group hover:border-orange-500/30 hover:-translate-y-1 transition-all duration-300 hover:glow-primary">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 group-hover:from-cyan-500/30 group-hover:to-blue-600/30 transition-colors">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-orange-500/20 to-amber-600/20 text-orange-400 group-hover:from-orange-500/30 group-hover:to-amber-600/30 transition-colors">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-semibold group-hover:text-cyan-400 transition-colors">
+                  <h3 className="font-semibold group-hover:text-orange-400 transition-colors">
                     {category.category}
                   </h3>
                 </div>
@@ -63,7 +63,7 @@ export default function Skills() {
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1.5 text-xs rounded-full border border-white/10 text-soft-gray hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/5 transition-all duration-200"
+                      className="px-3 py-1.5 text-xs rounded-full border border-card-border text-soft-gray hover:border-orange-500/40 hover:text-orange-400 hover:bg-orange-500/5 transition-all duration-200"
                     >
                       {skill}
                     </span>

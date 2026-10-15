@@ -1,10 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'motion/react';
 import { Code2, Terminal, MapPin, Mail, Phone, GraduationCap } from 'lucide-react';
 import { personalInfo } from '@/lib/data/resume';
 import Section from '@/components/ui/Section';
 import ScrollReveal from '@/components/animations/ScrollReveal';
+import StaggerContainer, { slideLeftVariants } from '@/components/animations/StaggerContainer';
 
 export default function About() {
   return (
@@ -23,13 +25,24 @@ export default function About() {
         <ScrollReveal direction="right">
           <div className="glass-card p-8 relative overflow-hidden group">
             {/* Glow decoration */}
-            <div className="absolute -top-20 -right-20 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-colors duration-500" />
+            <div className="absolute -top-20 -right-20 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition-colors duration-500" />
 
             <div className="flex items-center gap-4 mb-6">
               <div className="relative">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-3xl font-bold text-white glow-primary">
-                  A
-                </div>
+                {personalInfo.photo ? (
+                  <Image
+                    src={personalInfo.photo}
+                    alt={personalInfo.name}
+                    width={80}
+                    height={80}
+                    className="w-20 h-20 rounded-2xl object-cover glow-primary"
+                    priority
+                  />
+                ) : (
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-3xl font-bold text-white glow-primary">
+                    A
+                  </div>
+                )}
                 <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 border-4 border-background animate-pulse" />
               </div>
               <div>
@@ -44,19 +57,19 @@ export default function About() {
 
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-3 text-soft-gray">
-                <MapPin className="w-4 h-4 text-cyan-400" />
+                <MapPin className="w-4 h-4 text-orange-400" />
                 {personalInfo.location}
               </div>
               <div className="flex items-center gap-3 text-soft-gray">
-                <Mail className="w-4 h-4 text-cyan-400" />
+                <Mail className="w-4 h-4 text-orange-400" />
                 {personalInfo.email}
               </div>
               <div className="flex items-center gap-3 text-soft-gray">
-                <Phone className="w-4 h-4 text-cyan-400" />
+                <Phone className="w-4 h-4 text-orange-400" />
                 {personalInfo.phone}
               </div>
               <div className="flex items-center gap-3 text-soft-gray">
-                <GraduationCap className="w-4 h-4 text-cyan-400" />
+                <GraduationCap className="w-4 h-4 text-orange-400" />
                 B.Tech in CSE
               </div>
             </div>
@@ -68,7 +81,7 @@ export default function About() {
           <ScrollReveal direction="left" delay={0.1}>
             <div className="glass-card p-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
+                <div className="p-2 rounded-lg bg-orange-500/10 text-orange-400">
                   <Code2 className="w-5 h-5" />
                 </div>
                 <h4 className="font-semibold">What I Do</h4>
@@ -85,12 +98,12 @@ export default function About() {
           <ScrollReveal direction="left" delay={0.2}>
             <div className="glass-card p-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
+                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400">
                   <Terminal className="w-5 h-5" />
                 </div>
                 <h4 className="font-semibold">My Strengths</h4>
               </div>
-              <div className="space-y-2">
+              <StaggerContainer className="space-y-2" stagger={0.12}>
                 {[
                   'MERN Stack Development',
                   'RESTful API Design & Implementation',
@@ -98,12 +111,16 @@ export default function About() {
                   'MVC Architecture & Best Practices',
                   'Agile/Scrum Methodology',
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm text-soft-gray">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+                  <motion.div
+                    key={item}
+                    variants={slideLeftVariants}
+                    className="flex items-center gap-2 text-sm text-soft-gray"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-amber-500" />
                     {item}
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </StaggerContainer>
             </div>
           </ScrollReveal>
         </div>

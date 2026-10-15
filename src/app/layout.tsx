@@ -4,6 +4,8 @@ import { Providers } from "./providers";
 import ClientWrapper from "./ClientWrapper";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import BackgroundFX from "@/components/layout/BackgroundFX";
+import WaterDistortion from "@/components/animations/WaterDistortion";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0F14",
+  themeColor: "#0A0705",
   width: "device-width",
   initialScale: 1,
 };
@@ -63,10 +65,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <BackgroundFX />
         <ClientWrapper>
           <Providers>
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              <WaterDistortion>{children}</WaterDistortion>
+            </main>
             <Footer />
           </Providers>
         </ClientWrapper>

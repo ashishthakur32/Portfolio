@@ -62,7 +62,7 @@ export default function ScrambleText({
     <span ref={containerRef} className={className}>
       {display}
       {isAnimating && (
-        <span className="inline-block w-[2px] h-[1em] bg-cyan-400 ml-0.5 animate-pulse align-text-bottom" />
+        <span className="inline-block w-[2px] h-[1em] bg-orange-400 ml-0.5 animate-pulse align-text-bottom" />
       )}
     </span>
   );

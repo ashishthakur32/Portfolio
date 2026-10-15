@@ -6,11 +6,11 @@ import { personalInfo } from '@/lib/data/resume';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 py-10">
+    <footer className="border-t border-card-border py-10">
       <div className="container-portfolio flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <span className="text-lg font-bold text-gradient">Ashish</span>
-          <span className="text-sm text-soft-gray">© {new Date().getFullYear()}</span>
+          <span className="text-sm text-soft-gray">Â© {new Date().getFullYear()}</span>
         </div>
 
         <nav className="flex items-center gap-6">

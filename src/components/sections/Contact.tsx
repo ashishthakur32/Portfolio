@@ -72,14 +72,14 @@ export default function Contact() {
     {
       icon: LinkedInIcon,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/ashishthakur',
+      value: 'linkedin.com/in/ashish-kumar-thakur-487364211',
       href: personalInfo.linkedin,
       external: true,
     },
     {
       icon: GitHubIcon,
       label: 'GitHub',
-      value: 'github.com/ashishthakur',
+      value: 'github.com/ashishthakur32',
       href: personalInfo.github,
       external: true,
     },
@@ -102,7 +102,7 @@ export default function Contact() {
           <ScrollReveal direction="right">
             <p className="text-soft-gray leading-relaxed mb-6">
               I&apos;m currently looking for software development opportunities and open
-              to collaborating on interesting projects. Feel free to reach out — I&apos;ll
+              to collaborating on interesting projects. Feel free to reach out â€” I&apos;ll
               get back to you as soon as I can.
             </p>
           </ScrollReveal>
@@ -114,14 +114,14 @@ export default function Contact() {
                 {...(item.external
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
-                className="glass-card p-4 flex items-center gap-4 group hover:border-cyan-500/30 transition-all duration-300"
+                className="glass-card p-4 flex items-center gap-4 group hover:border-orange-500/30 transition-all duration-300"
               >
-                <div className="p-3 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 group-hover:from-cyan-500/30 group-hover:to-blue-600/30 transition-colors">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500/20 to-amber-600/20 text-orange-400 group-hover:from-orange-500/30 group-hover:to-amber-600/30 transition-colors">
                   <item.icon className="w-5 h-5" />
                 </div>
                 <div>
                   <p className="text-xs text-soft-gray uppercase tracking-wide">{item.label}</p>
-                  <p className="font-medium text-sm group-hover:text-cyan-400 transition-colors">
+                  <p className="font-medium text-sm group-hover:text-orange-400 transition-colors">
                     {item.value}
                   </p>
                 </div>
@@ -143,7 +143,7 @@ export default function Contact() {
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg bg-card-bg border border-card-border focus:border-cyan-500/50 outline-none transition-colors text-sm text-foreground placeholder-soft-gray/50"
+                className="w-full px-4 py-3 rounded-lg bg-card-bg border border-card-border focus:border-orange-500/50 outline-none transition-colors text-sm text-foreground placeholder-soft-gray/50"
                 placeholder="John Doe"
               />
             </div>
@@ -158,7 +158,7 @@ export default function Contact() {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg bg-card-bg border border-card-border focus:border-cyan-500/50 outline-none transition-colors text-sm text-foreground placeholder-soft-gray/50"
+                className="w-full px-4 py-3 rounded-lg bg-card-bg border border-card-border focus:border-orange-500/50 outline-none transition-colors text-sm text-foreground placeholder-soft-gray/50"
                 placeholder="john@example.com"
               />
             </div>
@@ -173,7 +173,7 @@ export default function Contact() {
                 rows={5}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg bg-card-bg border border-card-border focus:border-cyan-500/50 outline-none transition-colors text-sm text-foreground placeholder-soft-gray/50 resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-card-bg border border-card-border focus:border-orange-500/50 outline-none transition-colors text-sm text-foreground placeholder-soft-gray/50 resize-none"
                 placeholder="Tell me about your project or opportunity..."
               />
             </div>
@@ -183,7 +183,7 @@ export default function Contact() {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={status === 'submitting'}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium transition-all hover:opacity-90 disabled:opacity-60 glow-primary"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-amber-600 text-white font-medium transition-all hover:opacity-90 disabled:opacity-60 glow-primary"
             >
               {status === 'submitting' ? (
                 <>

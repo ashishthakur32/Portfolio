@@ -13,7 +13,7 @@ type GlowCardProps = {
 export default function GlowCard({
   children,
   className = '',
-  glowColor = 'rgba(34, 211, 238, 0.15)',
+  glowColor = 'rgba(255, 90, 31, 0.15)',
 }: GlowCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
@@ -57,7 +57,7 @@ export default function GlowCard({
       }}
       className={cn('relative group', className)}
     >
-      <div className="glass-card relative overflow-hidden h-full transition-all duration-300 group-hover:border-cyan-500/30">
+      <div className="glass-card relative overflow-hidden h-full transition-all duration-300 group-hover:border-orange-500/30">
         {/* Glow effect */}
         <motion.div
           className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"

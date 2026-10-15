@@ -29,6 +29,27 @@ export const itemVariants: Variants = {
   },
 };
 
+export const slideLeftVariants: Variants = {
+  hidden: { opacity: 0, x: -80 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const slideRightVariants: Variants = {
+  hidden: { opacity: 0, x: 80 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const sideVariants = (index: number): Variants =>
+  index % 2 === 0 ? slideLeftVariants : slideRightVariants;
+
 export default function StaggerContainer({
   children,
   className,

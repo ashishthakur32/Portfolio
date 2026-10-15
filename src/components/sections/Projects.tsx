@@ -7,6 +7,7 @@ import { GitHubIcon } from '@/components/ui/BrandIcons';
 import { projects } from '@/lib/data/resume';
 import Section from '@/components/ui/Section';
 import ScrollReveal from '@/components/animations/ScrollReveal';
+import StaggerContainer, { sideVariants } from '@/components/animations/StaggerContainer';
 import { cn } from '@/lib/utils';
 
 type Filter = 'all' | 'fullstack' | 'frontend' | 'ai-ml' | 'backend';
@@ -61,7 +62,7 @@ function TiltCard({
       className="h-full"
     >
       <div className="relative h-full">
-        <div className="glass-card p-6 h-full group border-white/10 relative overflow-hidden">
+        <div className="glass-card p-6 h-full group border-card-border relative overflow-hidden">
           {/* Gradient top bar */}
           <div
             className={cn(
@@ -76,7 +77,7 @@ function TiltCard({
           <motion.div
             className="absolute inset-0 rounded-xl pointer-events-none opacity-40"
             style={{
-              background: `radial-gradient(400px circle at ${glowX}px ${glowY}px, rgba(34,211,238,0.2), transparent 70%)`,
+              background: `radial-gradient(400px circle at ${glowX}px ${glowY}px, rgba(255,90,31,0.2), transparent 70%)`,
             }}
           />
         )}
@@ -102,7 +103,7 @@ export default function Projects() {
           Featured <span className="text-gradient">Projects</span>
         </>
       }
-      subtitle="A collection of my best work — full-stack applications, AI integrations, and production-grade systems."
+      subtitle="A collection of my best work Ã¢â‚¬â€ full-stack applications, AI integrations, and production-grade systems."
     >
       {/* Filters */}
       <ScrollReveal className="mb-10 flex flex-wrap justify-center gap-3">
@@ -113,8 +114,8 @@ export default function Projects() {
             className={cn(
               'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border',
               activeFilter === filter.value
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-transparent glow-primary'
-                : 'border-white/10 text-soft-gray hover:border-cyan-500/40 hover:text-cyan-400'
+                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white border-transparent glow-primary'
+                : 'border-card-border text-soft-gray hover:border-orange-500/40 hover:text-orange-400'
             )}
           >
             {filter.label}
@@ -123,9 +124,9 @@ export default function Projects() {
       </ScrollReveal>
 
       {/* Projects grid */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <StaggerContainer className="grid md:grid-cols-2 gap-6" stagger={0.15}>
         {filteredProjects.map((project, index) => (
-          <ScrollReveal key={project.title} delay={index * 0.1}>
+          <motion.div key={project.title} variants={sideVariants(index)}>
             <TiltCard gradient={project.gradient}>
               <div className="flex items-start justify-between mb-4" style={{ transform: 'translateZ(30px)' }}>
                 <div
@@ -143,7 +144,7 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${project.title} live demo`}
-                      className="p-2 rounded-lg text-soft-gray hover:text-cyan-400 hover:bg-white/5 transition-colors"
+                      className="p-2 rounded-lg text-soft-gray hover:text-orange-400 hover:bg-foreground/5 transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
@@ -154,7 +155,7 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${project.title} GitHub repository`}
-                      className="p-2 rounded-lg text-soft-gray hover:text-cyan-400 hover:bg-white/5 transition-colors"
+                      className="p-2 rounded-lg text-soft-gray hover:text-orange-400 hover:bg-foreground/5 transition-colors"
                     >
                       <GitHubIcon className="w-4 h-4" />
                     </a>
@@ -162,7 +163,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold group-hover:text-cyan-400 transition-colors mb-3" style={{ transform: 'translateZ(20px)' }}>
+              <h3 className="text-xl font-bold group-hover:text-orange-400 transition-colors mb-3" style={{ transform: 'translateZ(20px)' }}>
                 {project.title}
               </h3>
 
@@ -174,16 +175,16 @@ export default function Projects() {
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 rounded-md text-xs font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                    className="px-2.5 py-1 rounded-md text-xs font-medium bg-orange-500/10 text-orange-400 border border-orange-500/20"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
             </TiltCard>
-          </ScrollReveal>
+          </motion.div>
         ))}
-      </div>
+      </StaggerContainer>
     </Section>
   );
 }
